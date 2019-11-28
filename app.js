@@ -29,6 +29,22 @@ app.post('/api/todos', function (req, res) {
     res.send(itemToAdd);
 });
 
+// we want to get a particular todoItem by id
+// /api/todos/1
+app.get('/api/todos/:id', function (req, res) {
+    const todoId = req.params.id;
+    const item = todos.find(x => x.id === todoId);
+    res.send(item);
+});
+
+app.put('/api/todos/:id', (req, res) => {
+    const itemToupdate = todos.find(x => x.id === req.params.id);
+    for (let key of Object.keys(req.body)) {
+        itemToupdate[key] = req.body[key];
+    }
+    res.send(itemToupdate);
+});
+
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
