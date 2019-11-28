@@ -45,6 +45,13 @@ app.put('/api/todos/:id', (req, res) => {
     res.send(itemToupdate);
 });
 
+app.del('/api/todos/:id', (req, res) => {
+    const itemToDelete = todos.find(x => x.id === req.params.id);
+
+    todos.splice(todos.indexOf(itemToDelete), 1);
+    res.send(itemToDelete);
+});
+
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
