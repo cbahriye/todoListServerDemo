@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+
+app.use(express.json());
+
 const port = 3000;
 
 let todos = [
@@ -15,8 +18,14 @@ app.get('/', (req, res) => res.send('Welcome home'));
 // we want an endpoint getting all todos
 // /api/todos
 app.get('/api/todos', (req, res) => {
-
     res.send(todos);
 });
+
+// we use post to create an item
+app.post('/api/todos', function (req, res) {
+    console.log(req.body);
+    res.send('I have done post');
+});
+
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
