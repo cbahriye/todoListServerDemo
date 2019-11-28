@@ -11,6 +11,7 @@ let todos = [
     {id: "3", task: 'task3', isCompleted: false},
     {id: "4", task: 'task4', isCompleted: false},
 ];
+let todosId = todos.length;
 
 // we handle the get request using app.get
 app.get('/', (req, res) => res.send('Welcome home'));
@@ -23,9 +24,11 @@ app.get('/api/todos', (req, res) => {
 
 // we use post to create an item
 app.post('/api/todos', function (req, res) {
-    console.log(req.body);
-    res.send('I have done post');
+    const itemToAdd = {...req.body, id: ++todosId};
+    todos.push(itemToAdd);
+    res.send(itemToAdd);
 });
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
