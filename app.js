@@ -3,7 +3,7 @@ const app = express();
 
 app.use(express.json());
 
-const port = 3000;
+const port = 5000;
 
 let todos = [
     {id: "1", task: 'task1', isCompleted: false},
@@ -15,6 +15,14 @@ let todosId = todos.length;
 
 // we handle the get request using app.get
 app.get('/', (req, res) => res.send('Welcome home'));
+
+// we want an endpoint filtering todo by name
+// /api/todos/search?task=sk
+app.get('/api/todos/search', (req, res) => {
+    const taskQueryString = req.query.task;
+    const fitleredItems = todos.filter(x => x.task.indexOf(taskQueryString) !== -1);
+    res.send(fitleredItems);
+});
 
 // we want an endpoint getting all todos
 // /api/todos
