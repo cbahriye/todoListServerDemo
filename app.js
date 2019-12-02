@@ -45,7 +45,7 @@ app.put('/api/todos/:id', (req, res) => {
     res.send(itemToupdate);
 });
 
-app.del('/api/todos/:id', (req, res) => {
+app.delete('/api/todos/:id', (req, res) => {
     const itemToDelete = todos.find(x => x.id === req.params.id);
 
     todos.splice(todos.indexOf(itemToDelete), 1);
