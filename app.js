@@ -16,13 +16,6 @@ let todosId = todos.length;
 // we handle the get request using app.get
 app.get('/', (req, res) => res.send('Welcome home'));
 
-// we want an endpoint filtering todo by name
-// /api/todos/search?task=sk
-app.get('/api/todos/search', (req, res) => {
-    const taskQueryString = req.query.task;
-    const fitleredItems = todos.filter(x => x.task.indexOf(taskQueryString) !== -1);
-    res.send(fitleredItems);
-});
 
 // we want an endpoint getting all todos
 // /api/todos
@@ -37,12 +30,23 @@ app.post('/api/todos', function (req, res) {
     res.send(itemToAdd);
 });
 
+
 // we want to get a particular todoItem by id
 // /api/todos/1
-app.get('/api/todos/:id', function (req, res) {
+app.get('/api/todos/:id(\\d+)/', function (req, res) {
     const todoId = req.params.id;
     const item = todos.find(x => x.id === todoId);
     res.send(item);
+});
+
+// we want an endpoint filtering todo by name
+// /api/todos/search?task=sk
+// /api/todos/:id([a-zA-Z]+)  // char only url
+app.get('/api/todos/search', (req, res) => {
+    const taskQueryString = req.query.task;
+    const fitleredItems = todos.filter(
+        x => x.task.indexOf(taskQueryString) !== -1);
+    res.send(fitleredItems);
 });
 
 app.put('/api/todos/:id', (req, res) => {
