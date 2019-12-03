@@ -9,8 +9,10 @@ class ToDo {
         this.todosId = this.todos.length;
     }
 
-    getAll() {
-        return this.todos;
+    getAll(cb) {
+        setTimeout(() => {
+            return cb(this.todos);
+        }, 100);
     }
 
     findOne(id) {

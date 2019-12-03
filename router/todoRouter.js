@@ -5,7 +5,9 @@ const todoService = require('../service/todoService');
 // we want an endpoint getting all todos
 // /api/todos
 router.get('/', (req, res) => {
-    res.send(todoService.getAll());
+    // callback
+    // todoService.getAll(res.send);
+    todoService.getAll((data) => res.send(data));
 });
 
 // we use post to create an item
