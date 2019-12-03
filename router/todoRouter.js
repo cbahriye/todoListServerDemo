@@ -20,7 +20,8 @@ router.post('/', function (req, res) {
 // /api/todos/1
 router.get('/:id(\\d+)/', function (req, res) {
     const todoId = req.params.id;
-    res.send(todoService.findOne(todoId));
+    // todoService.findOne(todoId, res.send);
+    todoService.findOne(todoId, (x => res.send(x)));
 });
 
 // we want an endpoint filtering todo by name
@@ -28,7 +29,7 @@ router.get('/:id(\\d+)/', function (req, res) {
 // /api/todos/:id([a-zA-Z]+)  // char only url
 router.get('/search', (req, res) => {
     const taskQueryString = req.query.task;
-    res.send(todoService.findByName(taskQueryString));
+    todoService.findByName(taskQueryString, res.send);
 });
 
 router.put('/:id', (req, res) => {

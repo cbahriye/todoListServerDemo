@@ -15,13 +15,18 @@ class ToDo {
         }, 100);
     }
 
-    findOne(id) {
-        return this.todos.find(x => x.id === id);
+    findOne(id, cb) {
+        setTimeout(() => {
+            return cb(this.todos.find(x => x.id === id));
+        }, 100);
     }
 
-    findByName(name) {
-        return this.todos.filter(
-            x => x.task.indexOf(name) !== -1);
+    findByName(name, cb) {
+        setTimeout(() => {
+            const v = this.todos.filter(
+                x => x.task.indexOf(name) !== -1);
+            return cb(v);
+        },100);
     }
 
     add(item) {
