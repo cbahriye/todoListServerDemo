@@ -1,9 +1,11 @@
 const express = require('express');
 const todoRoutes = require('./router/todoRouter');
+const cors = require('cors');
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 const port = 5000;
 
