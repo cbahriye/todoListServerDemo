@@ -9,10 +9,12 @@ class ToDo {
         this.todosId = this.todos.length;
     }
 
-    getAll(cb) {
-        setTimeout(() => {
-            return cb(this.todos);
-        }, 100);
+    async getAll(cb) {
+        return await new Promise(resolve => {
+            setTimeout(() => {
+                resolve(this.todos);
+            }, 100);
+        });
     }
 
     findOne(id, cb) {

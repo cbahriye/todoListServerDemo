@@ -4,10 +4,11 @@ const todoService = require('../service/todoService');
 
 // we want an endpoint getting all todos
 // /api/todos
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     // callback
     // todoService.getAll(res.send);
-    todoService.getAll((data) => res.send(data));
+    const todos = await todoService.getAll();
+    res.send(todos);
 });
 
 // we use post to create an item
